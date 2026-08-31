@@ -24,17 +24,23 @@ export function CouponModal() {
     }
   };
 
-  const goStore = () => {
+ const goStore = () => {
   const tid = makeTid();
-  logEvent({ type: "click", store: store.slug, coupon: active.id, tid });
+
+  logEvent({
+    type: "click",
+    store: store.slug,
+    coupon: active.id,
+    tid,
+  });
 
   const destinationUrl = store.affiliate_url || store.url;
 
-  window.open(
-    affUrl(destinationUrl, tid),
-    "_blank",
-    "noopener,noreferrer"
-  );
+  const finalUrl = store.affiliate_url
+    ? destinationUrl
+    : affUrl(destinationUrl, tid);
+
+  window.open(finalUrl, "_blank", "noopener,noreferrer");
 };
 
   return (
