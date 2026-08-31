@@ -147,7 +147,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const ok = await copyText(c.code);
       toast(ok ? "تم نسخ الكود بنجاح" : "يمكنك نسخ الكود من النافذة", ok ? "ok" : "info");
       setActive(c);
-      if (store) window.open(affUrl(store.url, tid), "_blank", "noopener,noreferrer");
+      if (store) {
+  const destinationUrl = store.affiliate_url || store.url;
+
+  const finalUrl = store.affiliate_url
+    ? destinationUrl
+    : affUrl(destinationUrl, tid);
+
+  window.open(finalUrl, "_blank", "noopener,noreferrer");
+}
     },
     [pushRecent, toast]
   );
