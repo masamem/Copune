@@ -84,7 +84,9 @@ export const stores: Store[] = [
   },
   {
     slug: "amazon", name: "أمازون السعودية", en: "Amazon.sa", mono: "a", color: "#232f3e", fg: "#ffffff",
-    url: "https://www.amazon.sa/", tagline: "تشكيلة عالمية بأسعار محلية",
+    url: "https://www.amazon.sa/",
+    affiliate_url: "https://link.amazon/B0gyqQDh4",
+    tagline: "...",
     desc: "ملايين المنتجات من أمازون العالمية مع شحن سريع وبرنامج برايم وإرجاع سهل داخل السعودية.",
     rating: 4.7, reviews: 5402, cats: ["electronics", "home", "kids", "health"], updatedH: 3, featured: true,
   },
