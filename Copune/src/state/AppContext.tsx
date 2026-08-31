@@ -138,28 +138,36 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [setRecent]
   );
 
-  const openCoupon = useCallback(
-    async (c: Coupon) => {
-      const store = allStoresRef.current.find((s) => s.slug === c.store);
-      const tid = makeTid();
-      logEvent({ type: "reveal", store: c.store, coupon: c.id, tid });
-      pushRecent(c.id);
-      const ok = await copyText(c.code);
-      toast(ok ? "تم نسخ الكود بنجاح" : "يمكنك نسخ الكود من النافذة", ok ? "ok" : "info");
-      setActive(c);
-      if (store) {
-  const destinationUrl = store.affiliate_url || store.url;
+const openCoupon = useCallback(
+  async (c: Coupon) => {
+    const store = allStoresRef.current.find((s) => s.slug === c.store);
+    const tid = makeTid();
 
-  const finalUrl = store.affiliate_url
-    ? destinationUrl
-    : affUrl(destinationUrl, tid);
+    logEvent({ type: "reveal", store: c.store, coupon: c.id, tid });
+    pushRecent(c.id);
 
-  window.open(finalUrl, "_blank", "noopener,noreferrer");
-}
-    },
-    [pushRecent, toast]
-  );
+    const ok = await copyText(c.code);
 
+    toast(
+      ok ? "تم نسخ الكود بنجاح" : "يمكنك نسخ الكود من النافذة",
+      ok ? "ok" : "info"
+    );
+
+    setActive(c);
+
+    if (store) {
+      const destinationUrl = store.affiliate_url || store.url;
+
+      const finalUrl = store.affiliate_url
+        ? destinationUrl
+        : affUrl(destinationUrl, tid);
+
+      window.open(finalUrl, "_blank", "noopener,noreferrer");
+    }
+  },
+  [pushRecent, toast]
+);
+  
   /* keep a ref of stores to avoid circular deps */
   const allStores = useMemo(() => [...baseStores, ...customStores], [customStores]);
   const allStoresRef = useMemo(() => ({ current: allStores }), [allStores]);
