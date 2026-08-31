@@ -29,22 +29,23 @@ export type Coupon = {
   id: string;
   store: string;
   code: string;
-  label: string; // e.g. "25%"
-  value: number; // numeric discount for sorting
+  label: string;
+  value: number;
   title: string;
   desc: string;
   badges: string[];
-  rate: number; // success rate %
+  rate: number;
   uses: number;
-  lastMin: number; // minutes since last successful use
-  exp: number | null; // days until expiry
+  lastMin: number;
+  exp: number | null;
   terms: string[];
+  affiliate_url?: string | null;
   featured?: boolean;
   app?: boolean;
   first?: boolean;
   bank?: boolean;
   ship?: boolean;
-  addedD: number; // days ago added
+  addedD: number;
 };
 
 export type Deal = {
