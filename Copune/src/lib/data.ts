@@ -15,12 +15,13 @@ export type Store = {
   color: string;
   fg: string;
   url: string;
+  affiliate_url?: string | null;
   tagline: string;
   desc: string;
   rating: number;
   reviews: number;
   cats: string[];
-  updatedH: number; // hours since last verification
+  updatedH: number;
   featured?: boolean;
 };
 
