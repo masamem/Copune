@@ -25,10 +25,17 @@ export function CouponModal() {
   };
 
   const goStore = () => {
-    const tid = makeTid();
-    logEvent({ type: "click", store: store.slug, coupon: active.id, tid });
-    window.open(affUrl(store.url, tid), "_blank", "noopener,noreferrer");
-  };
+  const tid = makeTid();
+  logEvent({ type: "click", store: store.slug, coupon: active.id, tid });
+
+  const destinationUrl = store.affiliate_url || store.url;
+
+  window.open(
+    affUrl(destinationUrl, tid),
+    "_blank",
+    "noopener,noreferrer"
+  );
+};
 
   return (
     <Modal onClose={closeModal} labelledBy="coupon-modal-title">
