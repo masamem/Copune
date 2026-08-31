@@ -143,24 +143,38 @@ const openCoupon = useCallback(
     const store = allStoresRef.current.find((s) => s.slug === c.store);
     const tid = makeTid();
 
-    logEvent({ type: "reveal", store: c.store, coupon: c.id, tid });
+    logEvent({
+      type: "reveal",
+      store: c.store,
+      coupon: c.id,
+      tid,
+    });
+
     pushRecent(c.id);
 
-    const ok = await copyText(c.code);
+    if (c.code) {
+      const ok = await copyText(c.code);
 
-    toast(
-      ok ? "تم نسخ الكود بنجاح" : "يمكنك نسخ الكود من النافذة",
-      ok ? "ok" : "info"
-    );
+      toast(
+        ok ? "تم نسخ الكود بنجاح" : "يمكنك نسخ الكود من النافذة",
+        ok ? "ok" : "info"
+      );
+    } else {
+      toast("العرض متاح الآن", "info");
+    }
 
     setActive(c);
 
     if (store) {
-      const destinationUrl = store.affiliate_url || store.url;
+      const destinationUrl =
+        c.affiliate_url ||
+        store.affiliate_url ||
+        store.url;
 
-      const finalUrl = store.affiliate_url
-        ? destinationUrl
-        : affUrl(destinationUrl, tid);
+      const finalUrl =
+        c.affiliate_url || store.affiliate_url
+          ? destinationUrl
+          : affUrl(destinationUrl, tid);
 
       window.open(finalUrl, "_blank", "noopener,noreferrer");
     }
