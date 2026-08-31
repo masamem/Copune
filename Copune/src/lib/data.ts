@@ -162,7 +162,7 @@ export const stores: Store[] = [
 
 export const coupons: Coupon[] = [
   {
-    id: "c-noon-25", store: "noon", code: "WFR25", label: "25%", value: 25,
+    id: "c-noon-25", store: "noon", code: "MUVFX", label: "25%", value: 25,
     title: "خصم 25% على أول طلب من التطبيق",
     desc: "احصل على خصم فوري حتى 50 ر.س عند إتمام أول طلب لك من تطبيق نون.",
     badges: ["حصري", "أول طلب", "التطبيق"], rate: 94, uses: 12450, lastMin: 12, exp: 9,
