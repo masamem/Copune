@@ -77,8 +77,7 @@ export const categories: Category[] = [
 export const stores: Store[] = [
   {
     slug: "noon", name: "نون", en: "noon", mono: "n", color: "#f2c200", fg: "#241a00",
-    url: "https://www.noon.com/saudi-ar/",
-    affiliate_url: "https://s.noon.com/k5EPQc7GatE",
+    url: "https://www.noon.com/saudi-ar/",affiliate_url: "https://s.noon.com/k5EPQc7GatE",
     tagline: "كل اللي تحتاجه، بمكان واحد",
     desc: "منصة التسوق الأشهر في السعودية — إلكترونيات، أزياء، بقالة، جمال وأكثر، مع توصيل سريع داخل جميع المدن.",
     rating: 4.6, reviews: 3214, cats: ["electronics", "home", "beauty", "fashion", "kids"], updatedH: 2, featured: true,
