@@ -15,6 +15,7 @@ export type Store = {
   color: string;
   fg: string;
   url: string;
+  affiliate_url?: string | null;
   tagline: string;
   desc: string;
   rating: number;
