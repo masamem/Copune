@@ -198,22 +198,30 @@ export const coupons: Coupon[] = [
     terms: ["يسري مع بطاقات البنوك المشاركة", "الحد الأقصى 60 ر.س", "يُطبق قبل نقاط الولاء"],
     bank: true, addedD: 1,
   },
+  
   {
-    id: "c-amazon-15", store: "amazon", code: "SA15", label: "15%", value: 15,
-    title: "خصم 15% على الإلكترونيات والأجهزة",
-    desc: "خصم مباشر على تشكيلة مختارة من الإلكترونيات والأجهزة الذكية.",
-    badges: ["مجرب"], rate: 89, uses: 9841, lastMin: 18, exp: null,
-    terms: ["على منتجات مختارة تحمل علامة العرض", "حتى نفاد الكمية"],
+    id: "amazon-iphone-17-pro-max",
+    store: "amazon",
+    code: "",
+    label: "عرض",
+    value: 0,
+    title: "عرض iPhone 17 Pro Max على Amazon.sa",
+    desc: "اطّلع على السعر الحالي والعرض المتاح مباشرة على Amazon.sa.",
+    badges: ["عرض أمازون", "بدون كود"],
+    rate: 0,
+    uses: 0,
+    lastMin: 0,
+    exp: null,
+    terms: [
+      "لا يتطلب كود خصم",
+      "السعر والعرض قد يتغيران على Amazon.sa",
+      "تطبق شروط Amazon.sa"
+    ],
+    affiliate_url: "https://www.amazon.sa/%D8%AC%D9%88%D8%A7%D9%84-%D8%A7%D9%8A%D9%81%D9%88%D9%86-%D9%85%D8%A7%D9%83%D8%B3-%D8%AC%D9%8A%D8%AC%D8%A7-%D8%A7%D8%A8%D9%84/dp/B0FQG24QM8?linkCode=sl2&tag=muvfx-21&linkId=bf0fe5ad3a6026150965ab12819c74cd&ref_=as_li_ss_tl",
+    featured: true,
     addedD: 0,
   },
-  {
-    id: "c-amazon-100", store: "amazon", code: "WFR100", label: "100 ر.س", value: 20,
-    title: "خصم 100 ر.س على الطلبات فوق 500 ر.س",
-    desc: "كود حصري لقرّاء وفّر — وفّر 100 ر.س على سلة تتجاوز 500 ر.س.",
-    badges: ["حصري", "مجرب"], rate: 92, uses: 6133, lastMin: 9, exp: 12,
-    terms: ["الحد الأدنى 500 ر.س", "يشمل المنتجات المباعة من أمازون", "لا يشمل بطاقات الهدايا"],
-    featured: true, addedD: 0,
-  },
+
   {
     id: "c-namshi-30", store: "namshi", code: "NM30", label: "30%", value: 30,
     title: "خصم 30% على كامل الموقع",
