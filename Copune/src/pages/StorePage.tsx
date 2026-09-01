@@ -105,8 +105,11 @@ export function StorePage() {
         <section className="container-x pt-10">
           <SectionHead
             eyebrow="الأعلى نجاحاً"
-            title={`أفضل كود خصم ${store.name} اليوم`}
-            desc={`مجرّب من المستخدمين بنسبة نجاح ${featured.rate}% — انسخه بنقرة واحدة.`}
+            title={
+  store.slug === "amazon"
+    ? "أفضل عروض أمازون السعودية اليوم"
+    : `أفضل كود خصم ${store.name} اليوم`
+}
           />
           <Reveal>
             <div className="rounded-2xl bg-gradient-to-l from-gold-100 via-gold-50 to-transparent p-1.5 ring-1 ring-gold-200">
