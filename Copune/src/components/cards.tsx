@@ -79,6 +79,7 @@ export function CouponCard({ c, delay = 0, notchBg = "bg-paper" }: { c: Coupon; 
   if (!store) return null;
   const fav = isFav("coupons", c.id);
   const myVote = votes[c.id];
+  const isDirectOffer = !c.code;
 
   return (
     <Reveal delay={delay}>
@@ -127,49 +128,81 @@ export function CouponCard({ c, delay = 0, notchBg = "bg-paper" }: { c: Coupon; 
           </div>
 
           <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-semibold text-ink-500">
-            <span className="text-jade-600">نجح مع {c.rate}% من المستخدمين</span>
-            <span>استخدمه {fmt(c.uses)} شخصاً</span>
-            <span>آخر استخدام {timeAgo(c.lastMin)}</span>
-          </div>
+  {isDirectOffer ? (
+    <>
+      <span className="text-jade-600">عرض مباشر من {store.en}</span>
+      <span>بدون كود خصم</span>
+      <span>السعر والعرض قد يتغيران</span>
+    </>
+  ) : (
+    <>
+      <span className="text-jade-600">نجح مع {c.rate}% من المستخدمين</span>
+      <span>استخدمه {fmt(c.uses)} شخصاً</span>
+      <span>آخر استخدام {timeAgo(c.lastMin)}</span>
+    </>
+  )}
+</div>
 
-          <div className="mt-3 flex items-center gap-2 border-t border-dashed border-ink-100 pt-3">
-            <span className="text-[11px] font-bold text-ink-400">جرّبته؟</span>
-            <button
-              onClick={() => vote(c.id, "up", c.store)}
-              className={`btn-press flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold transition ${
-                myVote === "up" ? "bg-jade-500 text-white" : "bg-jade-50 text-jade-700 ring-1 ring-jade-200 hover:bg-jade-100"
-              }`}
-            >
-              <ThumbsUp className="h-3 w-3" />
-              يعمل
-            </button>
-            <button
-              onClick={() => vote(c.id, "down", c.store)}
-              className={`btn-press flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold transition ${
-                myVote === "down" ? "bg-flame-500 text-white" : "bg-flame-50 text-flame-700 ring-1 ring-flame-100 hover:bg-flame-100"
-              }`}
-            >
-              <ThumbsDown className="h-3 w-3" />
-              لا يعمل
-            </button>
-            {myVote && <span className="text-[10px] font-bold text-jade-600">شكراً لتقييمك</span>}
-          </div>
-        </div>
+          {!isDirectOffer && (
+  <div className="mt-3 flex items-center gap-2 border-t border-dashed border-ink-100 pt-3">
+    <span className="text-[11px] font-bold text-ink-400">جرّبته؟</span>
+
+    <button
+      onClick={() => vote(c.id, "up", c.store)}
+      className={`btn-press flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold transition ${
+        myVote === "up"
+          ? "bg-jade-500 text-white"
+          : "bg-jade-50 text-jade-700 ring-1 ring-jade-200 hover:bg-jade-100"
+      }`}
+    >
+      <ThumbsUp className="h-3 w-3" />
+      يعمل
+    </button>
+
+    <button
+      onClick={() => vote(c.id, "down", c.store)}
+      className={`btn-press flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold transition ${
+        myVote === "down"
+          ? "bg-flame-500 text-white"
+          : "bg-flame-50 text-flame-700 ring-1 ring-flame-100 hover:bg-flame-100"
+      }`}
+    >
+      <ThumbsDown className="h-3 w-3" />
+      لا يعمل
+    </button>
+
+    {myVote && (
+      <span className="text-[10px] font-bold text-jade-600">
+        شكراً لتقييمك
+      </span>
+    )}
+  </div>
+)}
 
         {/* action zone — desktop */}
         <div className="relative hidden w-52 shrink-0 flex-col items-center justify-center gap-3 border-s-2 border-dashed border-ink-200 p-5 md:flex">
           <span className={`absolute -start-[13px] -top-[13px] h-6 w-6 rounded-full border border-ink-100 ${notchBg}`} />
           <span className={`absolute -bottom-[13px] -start-[13px] h-6 w-6 rounded-full border border-ink-100 ${notchBg}`} />
           <p className="text-center font-display text-3xl font-black leading-none text-flame-600">
-            {c.label}
-            <span className="mt-1 block text-[11px] font-bold text-ink-400">القيمة الموفرة</span>
-          </p>
+  {isDirectOffer ? "عرض" : c.label}
+
+  <span className="mt-1 block text-[11px] font-bold text-ink-400">
+    {isDirectOffer ? "عرض مباشر" : "القيمة الموفرة"}
+  </span>
+</p>
           <button
-            onClick={() => openCoupon(c)}
-            className="btn-press w-full rounded-lg bg-brand-950 px-4 py-2.5 text-sm font-bold text-white shadow-glow hover:bg-brand-800"
-          >
-            عرض الكود
-          </button>
+  onClick={() => openCoupon(c)}
+  className="btn-press w-full rounded-lg bg-brand-950 px-4 py-2.5 text-sm font-bold text-white shadow-glow hover:bg-brand-800"
+>
+  {isDirectOffer ? (
+    <span className="flex items-center justify-center gap-2">
+      مشاهدة العرض
+      <ExternalLink className="h-4 w-4" />
+    </span>
+  ) : (
+    "عرض الكود"
+  )}
+</button>
           <p className="text-[10px] font-semibold tracking-[0.25em] text-ink-300" dir="ltr">
             {"• • • • • •"}
           </p>
@@ -179,18 +212,27 @@ export function CouponCard({ c, delay = 0, notchBg = "bg-paper" }: { c: Coupon; 
         </div>
 
         {/* action zone — mobile */}
-        <div className="relative border-t-2 border-dashed border-ink-200 md:hidden">
-          <div className="flex items-center justify-between gap-3 px-4 py-3.5">
-            <p className="font-display text-2xl font-black text-flame-600">{c.label}</p>
-            <button
-              onClick={() => openCoupon(c)}
-              className="btn-press flex items-center gap-2 rounded-lg bg-brand-950 px-5 py-2.5 text-sm font-bold text-white shadow-glow hover:bg-brand-800"
-            >
-              عرض الكود
-              <ArrowLeft className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
+<div className="relative border-t-2 border-dashed border-ink-200 md:hidden">
+  <div className="flex items-center justify-between gap-3 px-4 py-3.5">
+    <p className="font-display text-2xl font-black text-flame-600">
+      {isDirectOffer ? "عرض" : c.label}
+    </p>
+
+    <button
+  onClick={() => openCoupon(c)}
+  className="btn-press w-full rounded-lg bg-brand-950 px-4 py-2.5 text-sm font-bold text-white shadow-glow hover:bg-brand-800"
+>
+  {isDirectOffer ? (
+    <span className="flex items-center justify-center gap-2">
+      مشاهدة العرض
+      <ExternalLink className="h-4 w-4" />
+    </span>
+  ) : (
+    "عرض الكود"
+  )}
+</button>
+  </div>
+</div>
       </article>
     </Reveal>
   );
