@@ -166,7 +166,7 @@ const openCoupon = useCallback(
 
     // أمازون: فتح الرابط مباشرة بدون نافذة
     if (c.store === "amazon") {
-      window.location.href = finalUrl;
+      window.open(finalUrl, "_blank", "noopener,noreferrer");
       return;
     }
 
