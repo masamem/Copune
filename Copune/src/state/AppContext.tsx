@@ -152,6 +152,25 @@ const openCoupon = useCallback(
 
     pushRecent(c.id);
 
+    if (!store) return;
+
+    const destinationUrl =
+      c.affiliate_url ||
+      store.affiliate_url ||
+      store.url;
+
+    const finalUrl =
+      c.affiliate_url || store.affiliate_url
+        ? destinationUrl
+        : affUrl(destinationUrl, tid);
+
+    // أمازون: فتح الرابط مباشرة بدون نافذة
+    if (c.store === "amazon") {
+      window.location.href = finalUrl;
+      return;
+    }
+
+    // باقي المتاجر: نسخ الكود وإظهار النافذة كالمعتاد
     if (c.code) {
       const ok = await copyText(c.code);
 
@@ -165,19 +184,11 @@ const openCoupon = useCallback(
 
     setActive(c);
 
-    if (store) {
-      const destinationUrl =
-        c.affiliate_url ||
-        store.affiliate_url ||
-        store.url;
-
-      const finalUrl =
-        c.affiliate_url || store.affiliate_url
-          ? destinationUrl
-          : affUrl(destinationUrl, tid);
-
-      window.open(finalUrl, "_blank", "noopener,noreferrer");
-    }
+    window.open(
+      finalUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
   },
   [pushRecent, toast]
 );
