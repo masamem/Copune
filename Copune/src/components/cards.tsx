@@ -171,13 +171,18 @@ export function CouponCard({ c, delay = 0, notchBg = "bg-paper" }: { c: Coupon; 
       لا يعمل
     </button>
 
-    {myVote && (
+        {myVote && (
       <span className="text-[10px] font-bold text-jade-600">
         شكراً لتقييمك
       </span>
     )}
   </div>
 )}
+
+</div>
+
+{/* action zone — desktop */}
+<div className="relative hidden w-52 shrink-0 flex-col items-center justify-center gap-3 border-s-2 border-dashed border-ink-200 p-5 md:flex">
 
         {/* action zone — desktop */}
         <div className="relative hidden w-52 shrink-0 flex-col items-center justify-center gap-3 border-s-2 border-dashed border-ink-200 p-5 md:flex">
